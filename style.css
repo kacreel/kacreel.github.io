@@ -12,6 +12,7 @@
   }
 
   td{
+    border:none;
    width:33%;
 
   }
@@ -29,7 +30,7 @@ color:rgb(88,88,88);
 }
 
 
-.summary{
+/*.summary{
 background-color:rgba(39, 62, 62, 0.3);
 width:96%;
 padding-top:1%;
@@ -40,12 +41,28 @@ font-family: 'Bell MT';
 color:rgb(88,88,88);
 
 height:3%;
+}*/
+
+.green{
+
+  background-color:rgba(39, 62, 62, 0.3);
+  color:rgb(88,88,88);
+
+
 }
+
+.green td{
+  margin:0;
+  border:0;
+/*  border:1px solid rgba(39, 62, 62, 0.3);;
+*/}
 
 @font-face {
     font-family: 'Bell MT';
     src: url('bell-mt.ttf');
 }
+
+
 
 #summary{
   width:20%;
@@ -56,14 +73,16 @@ height:3%;
 }
 
   .label{
-    font-size:5vw;
+    width:20%;
+    font-size:3.5vw;
     text-align: center;
    color:rgba(39, 62, 62, 0.8);
 
   }
 
 
-  .text{    
+  .text{  
+  width:40%;  
     font-size:16px;
     font-family: 'Bell MT';
     line-height: 2.0;
@@ -71,13 +90,25 @@ height:3%;
 
   }
 
-    .course-name{
-      width:20%;
-    font-size:2vw;
-    text-align: center;
-   color:rgba(39, 62, 62, 0.8);
+    
 
+    .portrait-container{
+      width:15%;
+      padding-left:2%;
+    
   }
+
+   .portrait{
+                    background-image:url(imgs/test.jpg);
+
+                    background-size:cover; 
+                    
+                    width:300px; 
+                    height:300px; 
+                    border-radius:50%;
+                    background-position:center;
+
+        }
 
     .instructor{
     font-size:1.4vw;
@@ -87,15 +118,61 @@ height:3%;
   }
 
 
+.course-name{
+      width:19%;
+    font-size:2vw;
+    text-align: center;
+   color:rgba(39, 62, 62, 0.8);
+
+  }
+
   .course-description{ 
-    padding-right:10%;
-/*    border:black solid 1px;
-*/    width:70%;   
+    padding-right:5%;
+/*   border:black solid 1px;
+*/    width:50%;   
     font-size:16px;
     font-family: 'Bell MT';
     line-height: 2.0;
+    padding-left:2%;
   
   }
+
+
+  .research-pics{ 
+
+/*    background-color:red;
+*//*    width:100%;
+*/    padding-left:2%;
+/*    border:black solid 1px;
+*/    width:20%;   
+    font-size:16px;
+    
+  
+  }
+
+
+ #science-pic{
+    background-image:url(./imgs/topquark.jpg);
+  }
+  #bioethics-pic{
+    background-image:url(./imgs/bioethics1.jpg);
+  }
+
+#magic-pic{
+    background-image:url(./imgs/alchemy.jpg);
+  }
+  .research-circles{
+          box-shadow: 2px 4px 8px 5px #999999;
+
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    left:0%;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+/*    border:1px solid black;
+*/  }
 
   .studentworkcontainer{
     width:20%;
@@ -120,19 +197,7 @@ height:3%;
         #alchemy{ background-image: url("./imgs/alchemy.jpg") }
 
 
-  
 
-   .picture{
-                    background-image:url(imgs/test.jpg);
-
-                    background-size:cover; 
-                    
-                    width:300px; 
-                    height:300px; 
-                    border-radius:50%;
-                    background-position:center;
-
-        }
 
 
         .porch{
