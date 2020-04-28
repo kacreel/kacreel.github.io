@@ -21,7 +21,7 @@
   
 
   a{text-decoration: none;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Bell MT';
 }
 
 
@@ -83,7 +83,7 @@ height:3%;
 
   .text{  
   width:40%;  
-    font-size:16px;
+    font-size:18px; /*maybe should be bigger? was 16x */
     font-family: 'Bell MT';
     line-height: 2.0;
   
@@ -100,7 +100,7 @@ height:3%;
 
    .portrait{
                     background-image:url(imgs/test.jpg);
-
+                    box-shadow: 2px 4px 8px 5px #999999; /*KAC added*/
                     background-size:cover; 
                     
                     width:300px; 
@@ -150,19 +150,42 @@ height:3%;
   
   }
 
+  #neural-net{
+  background-image:url(./imgs/neuralnet.png);
+
+  }
+
+   #general-philsci{
+  background-image:url(./imgs/cmbr.png);
+  }
+
+
+  #transparency-pic{
+    background-image:url(./imgs/abstract1.png);
+  }
+
+  #ethics-pic{
+  background-image:url(./imgs/nypd.jpg); /* cameras.jpg); */
+
+  }
+
+  #earlymodern{
+    background-image:url(./imgs/degrouchy.jpg);
+  }
+
 
  #science-pic{
-    background-image:url(./imgs/topquark.jpg);
+    background-image:url(./imgs/standard-deviation.jpg); /* topquark.jpg); */
   }
   #bioethics-pic{
-    background-image:url(./imgs/bioethics1.jpg);
+    background-image:url(./imgs/bioethics1.jpg); /* doctor.png); */
   }
 
 #magic-pic{
-    background-image:url(./imgs/alchemy.jpg);
+    background-image:url(./imgs/al-biruni.jpg);   /* alchemy.jpg); */
   }
   .research-circles{
-          box-shadow: 2px 4px 8px 5px #999999;
+          box-shadow: 2px 4px 8px 5px #999999; /*KAC added*/
 
     background-size:cover;
     background-position:center;
@@ -215,7 +238,8 @@ height:3%;
 
 
            .officehour{
-                    background-image:url(imgs/officehours3.jpeg);
+            box-shadow: 2px 4px 8px 5px #999999;
+                    background-image:url(imgs/teaching-edited.jpg);
                     position: relative;
                     background-size:cover; 
                     margin-top:10%;
