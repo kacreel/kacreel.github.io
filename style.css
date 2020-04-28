@@ -151,12 +151,16 @@ height:3%;
   }
 
   #neural-net{
-  background-image:url(./imgs/neuralnet.png);
+  background-image:url(./imgs/neuralnet_color.png);
 
   }
 
    #general-philsci{
   background-image:url(./imgs/cmbr.png);
+  }
+
+  #ai-ethics-pic{
+    background-image:url(./imgs/leviathan.jpg);
   }
 
 
@@ -178,7 +182,7 @@ height:3%;
     background-image:url(./imgs/standard-deviation.jpg); /* topquark.jpg); */
   }
   #bioethics-pic{
-    background-image:url(./imgs/bioethics1.jpg); /* doctor.png); */
+    background-image:url(./imgs/twodoctors.jpg); /* bioethics1.jpg); doctor.png); */
   }
 
 #magic-pic{
