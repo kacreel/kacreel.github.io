@@ -179,7 +179,7 @@ height:3%;
 
 
  #science-pic{
-    background-image:url(./imgs/standard-deviation.jpg); /* topquark.jpg); */
+    background-image:url(./imgs/suncrop.jpg); /* standard-deviation.jpg); topquark.jpg); */
   }
   #bioethics-pic{
     background-image:url(./imgs/twodoctors.jpg); /* bioethics1.jpg); doctor.png); */
@@ -271,7 +271,7 @@ height:3%;
 
 
   .menu-links {
-    font-size: 16px;
+    font-size: 18px; /* kac -- was 16 */
       text-align: center;
       width: 15%;
       margin-left: 2%;
