@@ -317,7 +317,37 @@ height:3%;
 
   @media (max-device-width : 667px) {
 
-    /*.class{
-      font-size:10px;
-    }*/
+    h1{
+      font-family: 'Libre Caslon Text', serif;
+
+    }
+
+     .menu-links{
+      font-size:36px;
+    }
+
+     .label{
+      font-size:50px;
+    }
+
+    .text{
+      font-size:24px;
+    }
+
+#contact-text{
+  font-size:36px;
+}
+
+    .course-name
+    {font-size:24px;}
+
+     .course-description
+    {font-size:22px;}
+
+    .instructor{
+      font-size:22px;
+    }
+
+
+
   }
