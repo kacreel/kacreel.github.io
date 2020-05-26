@@ -2,6 +2,17 @@
 <html>
 
 <head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-167680016-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-167680016-1');
+</script>
+
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
     <link type="text/css" href="style.css" rel="stylesheet">
@@ -84,7 +95,9 @@
         <tr>
             <td class="course-name"><div >Philosophy of <br> Machine Learning</div></td>
             <td class="course-description"><div>
-        <p> Deep neural networks are often thought to be opaque black boxes. However, the sense in which they are opaque is philosophically interesting since every component of the system can be individually surveyed.  What would it mean for such a sytem to be transparent? Is transparency required for trust? I explore explanatory strategies for opaque machine learning both as it is used for science and as it is used in public life.  I am also interested in how machine learning influences scientific and social categories. When new features crosscut our existing scientific or social categories, how do we or should we revise our understanding of the world and its contents? 
+        <p> Deep neural networks are often thought to be opaque black boxes. However, the sense in which they are opaque is philosophically interesting since every component of the system can be individually surveyed.  What would it mean for such a sytem to be transparent? Is transparency required for trust? I explore explanatory strategies for opaque machine learning both as it is used for science and as it is used in public life.  For an example of this work see my paper on <a href="#transparency">transparency</a> below.
+            <br>
+        I am also interested in how machine learning influences scientific and social categories. When new features crosscut our existing scientific or social categories, how do we or should we revise our understanding of the world and its contents? 
         </p>
     </div></td>
 
@@ -96,7 +109,9 @@
   <tr> 
             <td class="course-name"><div >Ethics of <br> Artificial Intelligence</div></td>
             <td class="course-description"><div>
-        <p> Answers to epistemic questions about transparency and explanation are relevant to the use of algorithmic decision making in public life. I consider case studies of non-state use of automated decision-making, such as automated hiring systems and loan approval algorithms. What implications do adversarial examples and other known features of deep learning systems have for transparency and fairness?  Whether or not these systems are black boxes, if they are treated as such we may come to trust them on a testimonial basis.  I explore questions of machine testimony and of appropriate trust in automated decisionmaking systems.  
+        <p> Answers to epistemic questions about transparency and explanation are relevant to the use of algorithmic decision making in public life. I consider case studies of non-state use of automated decision-making, such as automated hiring systems and loan approval algorithms. What implications do adversarial examples and other known features of deep learning systems have for transparency and fairness? For an example of a current project, <b style="color:rgb(88, 88, 88)"> <a href='https://www.dropbox.com/s/v30qykg3lyqknrm/AlgorithmicLeviathanAbstract.pdf?dl=0'>here is an abstract.</a></b>
+        <br>
+        Whether or not these systems are black boxes, if they are treated as such we may come to trust them on a testimonial basis.  I explore questions of machine testimony and of appropriate trust in automated decisionmaking systems.
 <!-- 
 Drawing on contemporary pragmatists like Elizabeth Anderson, I propose an explanatory framework for algorithmic decisions made in public life that respects the multiplicity of explanatory purposes.  Although an applicant may first be interested in the reasons for a loan's denial, upon learning more about the system she might come to be interested in whether protected features such as race were used in the making the decision and whether the decision-making system as a whole is unjust.  A pragmatist account of meaning for purpose allows us to provide reasons that shift with the epistemic goals of the users. --> 
 
@@ -143,7 +158,7 @@ I am also interested in the normativity of scientific beliefs.  Arguments for po
 
         <tr><td class="course-name">Papers</td>
 
-        <td class="course-description"><p>
+        <td class="course-description"><p id="transparency"> 
             <h3>Transparency in Complex Computational Systems (forthcoming) <br><i>Philosophy of Science (October, 2020, Volume 87 Issue 4) </i></h3>   
 
 Abstract: Scientists depend on complex computational systems that are often ineliminably opaque, to the detriment of our ability to give scientific explanations and detect artifacts. Some philosophers have suggested treating opaque systems instrumentally, but computer scientists developing strategies for increasing transparency are correct in finding this unsatisfying. Instead, I propose an analysis of transparency as having three forms: transparency of the algorithm, the realization of the algorithm in code, and the way that code is run on particular hardware and data. This targets the transparency most useful for a task, avoiding instrumentalism by providing partial transparency when full transparency is impossible.
