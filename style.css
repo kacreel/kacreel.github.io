@@ -167,9 +167,34 @@ height:3%;
     background-image:url(./imgs/leviathan.jpg);
   }
 
+  #phil-sci-pic{
+    background-image:url(./imgs/philsci.jpg);
+  }
+
+  #arxiv-pic{
+    background-image:url(./imgs/arxiv.jpg);
+  }
+
+  #facct-pic{
+    background-image:url(./imgs/facct1.jpg);
+  }
+
   #nature-med{
     background-image:url(./imgs/naturemed1.jpg);
   }
+
+   #neurips-pic{
+    background-image:url(./imgs/neurips.png);
+  }
+
+   #case-studies-pic{
+    background-image:url(./imgs/casestudies.png);
+  }
+
+   #cjp-pic{
+    background-image:url(./imgs/cjp.jpg);
+  }
+
 
 
   #transparency-pic{
