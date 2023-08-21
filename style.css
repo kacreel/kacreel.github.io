@@ -175,6 +175,10 @@ height:3%;
     background-image:url(./imgs/arxiv.jpg);
   }
 
+  #fpq-pic{
+    background-image:url(./imgs/fpq-pic.jpg);
+  }
+
   #facct-pic{
     background-image:url(./imgs/facct1.jpg);
   }
