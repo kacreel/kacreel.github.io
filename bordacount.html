@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borda Count Poll</title>
+    <title>Rory's Fancy Borda Count Poll</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -176,22 +176,22 @@
             <div class="candidates-title">Available Candidates</div>
             <div id="candidates-list">
                 <!-- Default candidates -->
-                <div class="candidate-item" data-name="Option A">
+                <div class="candidate-item" data-name="Rudolf Carnap">
                     <div>
                         <input type="checkbox" class="candidate-checkbox" checked>
-                        <span>Option A</span>
+                        <span>Rudolf Carnap</span>
                     </div>
                 </div>
-                <div class="candidate-item" data-name="Option B">
+                <div class="candidate-item" data-name="Ruth Barcan Marcus">
                     <div>
                         <input type="checkbox" class="candidate-checkbox" checked>
-                        <span>Option B</span>
+                        <span>Ruth Barcan Marcus</span>
                     </div>
                 </div>
-                <div class="candidate-item" data-name="Option C">
+                <div class="candidate-item" data-name="John Basl">
                     <div>
                         <input type="checkbox" class="candidate-checkbox" checked>
-                        <span>Option C</span>
+                        <span>John Basl</span>
                     </div>
                 </div>
             </div>
@@ -201,19 +201,19 @@
             <div class="ranked-title">Ranked Candidates</div>
             <div id="options-list">
                 <!-- Ranked options will be placed here -->
-                <div class="option-item" draggable="true" data-name="Option A">
+                <div class="option-item" draggable="true" data-name="Rudolf Carnap">
                     <span class="rank-indicator">1</span>
-                    <span class="option-text">Option A</span>
+                    <span class="option-text">Rudolf Carnap</span>
                     <span class="drag-handle">⋮</span>
                 </div>
-                <div class="option-item" draggable="true" data-name="Option B">
+                <div class="option-item" draggable="true" data-name="Ruth Barcan Marcus">
                     <span class="rank-indicator">2</span>
-                    <span class="option-text">Option B</span>
+                    <span class="option-text">Ruth Barcan Marcus</span>
                     <span class="drag-handle">⋮</span>
                 </div>
-                <div class="option-item" draggable="true" data-name="Option C">
+                <div class="option-item" draggable="true" data-name="John Basl">
                     <span class="rank-indicator">3</span>
-                    <span class="option-text">Option C</span>
+                    <span class="option-text">John Basl</span>
                     <span class="drag-handle">⋮</span>
                 </div>
             </div>
@@ -541,22 +541,22 @@
                 // Reset candidates list
                 const candidatesList = document.getElementById('candidates-list');
                 candidatesList.innerHTML = `
-                    <div class="candidate-item" data-name="Option A">
+                    <div class="candidate-item" data-name="Rudolf Carnap">
                         <div>
                             <input type="checkbox" class="candidate-checkbox" checked>
-                            <span>Option A</span>
+                            <span>Rudolf Carnap</span>
                         </div>
                     </div>
-                    <div class="candidate-item" data-name="Option B">
+                    <div class="candidate-item" data-name="Ruth Barcan Marcus">
                         <div>
                             <input type="checkbox" class="candidate-checkbox" checked>
-                            <span>Option B</span>
+                            <span>Ruth Barcan Marcus</span>
                         </div>
                     </div>
-                    <div class="candidate-item" data-name="Option C">
+                    <div class="candidate-item" data-name="John Basl">
                         <div>
                             <input type="checkbox" class="candidate-checkbox" checked>
-                            <span>Option C</span>
+                            <span>John Basl</span>
                         </div>
                     </div>
                 `;
@@ -564,19 +564,19 @@
                 // Reset ranked options
                 const optionsList = document.getElementById('options-list');
                 optionsList.innerHTML = `
-                    <div class="option-item" draggable="true" data-name="Option A">
+                    <div class="option-item" draggable="true" data-name="Rudolf Carnap">
                         <span class="rank-indicator">1</span>
-                        <span class="option-text">Option A</span>
+                        <span class="option-text">Rudolf Carnap</span>
                         <span class="drag-handle">⋮</span>
                     </div>
-                    <div class="option-item" draggable="true" data-name="Option B">
+                    <div class="option-item" draggable="true" data-name="Ruth Barcan Marcus">
                         <span class="rank-indicator">2</span>
-                        <span class="option-text">Option B</span>
+                        <span class="option-text">Ruth Barcan Marcus</span>
                         <span class="drag-handle">⋮</span>
                     </div>
-                    <div class="option-item" draggable="true" data-name="Option C">
+                    <div class="option-item" draggable="true" data-name="John Basl">
                         <span class="rank-indicator">3</span>
-                        <span class="option-text">Option C</span>
+                        <span class="option-text">John Basl</span>
                         <span class="drag-handle">⋮</span>
                     </div>
                 `;
