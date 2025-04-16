@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borda Count Poll</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .poll-container {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .poll-header {
+            margin-bottom: 20px;
+        }
+        .candidates-container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 1px solid #e1e1e1;
+        }
+        .candidates-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .candidate-item {
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .candidate-item:hover {
+            background-color: #f5f5f5;
+        }
+        .candidate-checkbox {
+            margin-right: 10px;
+        }
+        .poll-options {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e1e1e1;
+        }
+        .ranked-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        .option-item {
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            cursor: move;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .option-item.dragging {
+            opacity: 0.5;
+        }
+        .rank-indicator {
+            font-weight: bold;
+            color: #3498db;
+            min-width: 30px;
+        }
+        .option-text {
+            flex-grow: 1;
+            padding: 0 10px;
+        }
+        .drag-handle {
+            cursor: grab;
+            color: #95a5a6;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .add-option-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        #new-option {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        #results {
+            margin-top: 30px;
+            display: none;
+        }
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .results-table th, .results-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .results-table th {
+            background-color: #f2f2f2;
+        }
+        .winner {
+            font-weight: bold;
+            color: #27ae60;
+        }
+        .option-explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 4px;
+        }
+        .no-ranked-message {
+            text-align: center;
+            padding: 15px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .unranked {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="poll-container">
+        <div class="poll-header">
+            <h1>Borda Count Poll</h1>
+            <p>Select candidates to include, then drag them to rank in your preferred order (most preferred at the top).</p>
+        </div>
+        
+        <div class="add-option-container">
+            <input type="text" id="new-option" placeholder="Add a new candidate">
+            <button id="add-option-btn">Add Candidate</button>
+        </div>
+        
+        <div class="candidates-container">
+            <div class="candidates-title">Available Candidates</div>
+            <div id="candidates-list">
+                <!-- Default candidates -->
+                <div class="candidate-item" data-name="Option A">
+                    <div>
+                        <input type="checkbox" class="candidate-checkbox" checked>
+                        <span>Option A</span>
+                    </div>
+                </div>
+                <div class="candidate-item" data-name="Option B">
+                    <div>
+                        <input type="checkbox" class="candidate-checkbox" checked>
+                        <span>Option B</span>
+                    </div>
+                </div>
+                <div class="candidate-item" data-name="Option C">
+                    <div>
+                        <input type="checkbox" class="candidate-checkbox" checked>
+                        <span>Option C</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="poll-options">
+            <div class="ranked-title">Ranked Candidates</div>
+            <div id="options-list">
+                <!-- Ranked options will be placed here -->
+                <div class="option-item" draggable="true" data-name="Option A">
+                    <span class="rank-indicator">1</span>
+                    <span class="option-text">Option A</span>
+                    <span class="drag-handle">⋮</span>
+                </div>
+                <div class="option-item" draggable="true" data-name="Option B">
+                    <span class="rank-indicator">2</span>
+                    <span class="option-text">Option B</span>
+                    <span class="drag-handle">⋮</span>
+                </div>
+                <div class="option-item" draggable="true" data-name="Option C">
+                    <span class="rank-indicator">3</span>
+                    <span class="option-text">Option C</span>
+                    <span class="drag-handle">⋮</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="calculate-btn">Calculate Results</button>
+            <button id="reset-btn">Reset Poll</button>
+        </div>
+        
+        <div id="results">
+            <h2>Poll Results (Borda Count)</h2>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Candidate</th>
+                        <th>Borda Points</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+                    <!-- Results will be inserted here -->
+                </tbody>
+            </table>
+            
+            <div class="option-explanation">
+                <h3>How Modified Borda Count Works</h3>
+                <p>In this modified Borda Count voting system:</p>
+                <ul>
+                    <li>Only candidates you choose to rank receive points</li>
+                    <li>If you rank N candidates, your first choice gets N-1 points</li>
+                    <li>Your second choice gets N-2 points, and so on</li>
+                    <li>Your last-ranked candidate gets 0 points</li>
+                    <li>Candidates you don't rank receive no points from you</li>
+                    <li>The candidate with the highest total points wins</li>
+                </ul>
+                <p>This system allows you to only vote for candidates you know about or support, while still rewarding candidates that are ranked highly.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize drag and drop functionality
+            initDragAndDrop();
+            
+            // Add event listeners
+            document.getElementById('add-option-btn').addEventListener('click', addNewCandidate);
+            document.getElementById('calculate-btn').addEventListener('click', calculateResults);
+            document.getElementById('reset-btn').addEventListener('click', resetPoll);
+            
+            // Initialize candidate checkboxes
+            initializeCandidateCheckboxes();
+            
+            // Initialize option listeners
+            updateRankIndicators();
+            
+            // Make Enter key add a new option when in the input field
+            document.getElementById('new-option').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addNewCandidate();
+                }
+            });
+        });
+        
+        // Variables to store drag state
+        let draggedItem = null;
+        
+        function initDragAndDrop() {
+            // Get all draggable items and add event listeners
+            document.querySelectorAll('.option-item').forEach(item => {
+                setupDraggableItem(item);
+            });
+            
+            // Add event listeners to the container
+            const container = document.getElementById('options-list');
+            
+            container.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                const afterElement = getDragAfterElement(container, e.clientY);
+                
+                if (afterElement == null) {
+                    container.appendChild(draggedItem);
+                } else {
+                    container.insertBefore(draggedItem, afterElement);
+                }
+                
+                updateRankIndicators();
+            });
+        }
+        
+        function initializeCandidateCheckboxes() {
+            // Add event listeners to all checkboxes
+            document.querySelectorAll('.candidate-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const candidateItem = this.closest('.candidate-item');
+                    const candidateName = candidateItem.dataset.name;
+                    
+                    if (this.checked) {
+                        // Add to ranked list
+                        addToRankedList(candidateName);
+                    } else {
+                        // Remove from ranked list
+                        removeFromRankedList(candidateName);
+                    }
+                });
+            });
+        }
+        
+        function addToRankedList(candidateName) {
+            const optionsList = document.getElementById('options-list');
+            
+            // Check if already exists
+            const existing = [...optionsList.querySelectorAll('.option-item')].find(
+                item => item.dataset.name === candidateName
+            );
+            
+            if (existing) return;
+            
+            const newOption = document.createElement('div');
+            newOption.className = 'option-item';
+            newOption.draggable = true;
+            newOption.dataset.name = candidateName;
+            
+            newOption.innerHTML = `
+                <span class="rank-indicator"></span>
+                <span class="option-text">${candidateName}</span>
+                <span class="drag-handle">⋮</span>
+            `;
+            
+            optionsList.appendChild(newOption);
+            setupDraggableItem(newOption);
+            updateRankIndicators();
+        }
+        
+        function removeFromRankedList(candidateName) {
+            const optionsList = document.getElementById('options-list');
+            const itemToRemove = [...optionsList.querySelectorAll('.option-item')].find(
+                item => item.dataset.name === candidateName
+            );
+            
+            if (itemToRemove) {
+                itemToRemove.remove();
+                updateRankIndicators();
+            }
+        }
+        
+        function setupDraggableItem(item) {
+            item.addEventListener('dragstart', function() {
+                draggedItem = this;
+                setTimeout(() => {
+                    this.classList.add('dragging');
+                }, 0);
+            });
+            
+            item.addEventListener('dragend', function() {
+                this.classList.remove('dragging');
+                draggedItem = null;
+                updateRankIndicators();
+            });
+        }
+        
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.option-item:not(.dragging)')];
+            
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+        
+        function addNewCandidate() {
+            const newOptionInput = document.getElementById('new-option');
+            const optionText = newOptionInput.value.trim();
+            
+            if (optionText === '') {
+                alert('Please enter a candidate name.');
+                return;
+            }
+            
+            // Check if candidate already exists
+            const candidatesList = document.getElementById('candidates-list');
+            const existing = [...candidatesList.querySelectorAll('.candidate-item')].find(
+                item => item.dataset.name === optionText
+            );
+            
+            if (existing) {
+                alert('This candidate already exists.');
+                newOptionInput.value = '';
+                return;
+            }
+            
+            // Add to candidates list
+            const newCandidate = document.createElement('div');
+            newCandidate.className = 'candidate-item';
+            newCandidate.dataset.name = optionText;
+            
+            newCandidate.innerHTML = `
+                <div>
+                    <input type="checkbox" class="candidate-checkbox" checked>
+                    <span>${optionText}</span>
+                </div>
+            `;
+            
+            candidatesList.appendChild(newCandidate);
+            
+            // Add event listener to the new checkbox
+            const checkbox = newCandidate.querySelector('.candidate-checkbox');
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    addToRankedList(optionText);
+                } else {
+                    removeFromRankedList(optionText);
+                }
+            });
+            
+            // Add to ranked list
+            addToRankedList(optionText);
+            
+            // Clear the input
+            newOptionInput.value = '';
+            newOptionInput.focus();
+        }
+        
+        function updateRankIndicators() {
+            const options = document.querySelectorAll('.option-item');
+            
+            if (options.length === 0) {
+                // Show "No ranked candidates" message if needed
+                const optionsList = document.getElementById('options-list');
+                if (!optionsList.querySelector('.no-ranked-message')) {
+                    const message = document.createElement('div');
+                    message.className = 'no-ranked-message';
+                    message.textContent = 'No ranked candidates. Check candidates above to add them to your ranking.';
+                    optionsList.appendChild(message);
+                }
+            } else {
+                // Remove "No ranked candidates" message if it exists
+                const message = document.querySelector('.no-ranked-message');
+                if (message) message.remove();
+                
+                // Update rank indicators
+                options.forEach((option, index) => {
+                    option.querySelector('.rank-indicator').textContent = index + 1;
+                });
+            }
+        }
+        
+        function calculateResults() {
+            const rankedOptions = document.querySelectorAll('.option-item');
+            const allCandidates = document.querySelectorAll('.candidate-item');
+            
+            if (rankedOptions.length < 1) {
+                alert('You need to rank at least one candidate to calculate results.');
+                return;
+            }
+            
+            const numRanked = rankedOptions.length;
+            const results = [];
+            
+            // Calculate Borda points for ranked options
+            rankedOptions.forEach((option, index) => {
+                const text = option.dataset.name;
+                // In Borda Count, the first option gets (numRanked-1) points, second gets (numRanked-2), etc.
+                const bordaPoints = numRanked - 1 - index;
+                results.push({ text, bordaPoints, ranked: true });
+            });
+            
+            // Add unranked candidates with 0 points
+            allCandidates.forEach(candidate => {
+                const name = candidate.dataset.name;
+                const isRanked = results.some(result => result.text === name);
+                
+                if (!isRanked) {
+                    results.push({ text: name, bordaPoints: 0, ranked: false });
+                }
+            });
+            
+            // Sort results by Borda points in descending order
+            results.sort((a, b) => b.bordaPoints - a.bordaPoints);
+            
+            // Display results
+            displayResults(results);
+        }
+        
+        function displayResults(results) {
+            const resultsBody = document.getElementById('results-body');
+            resultsBody.innerHTML = '';
+            
+            results.forEach((result, index) => {
+                const row = document.createElement('tr');
+                
+                // Add winner class to the top option
+                if (index === 0) {
+                    row.className = 'winner';
+                }
+                
+                if (!result.ranked) {
+                    row.className += ' unranked';
+                }
+                
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${result.text}</td>
+                    <td>${result.bordaPoints}</td>
+                    <td>${result.ranked ? 'Ranked' : 'Unranked'}</td>
+                `;
+                
+                resultsBody.appendChild(row);
+            });
+            
+            // Show results section
+            document.getElementById('results').style.display = 'block';
+        }
+        
+        function resetPoll() {
+            if (confirm('Are you sure you want to reset the poll? This will clear all candidates and results.')) {
+                // Reset candidates list
+                const candidatesList = document.getElementById('candidates-list');
+                candidatesList.innerHTML = `
+                    <div class="candidate-item" data-name="Option A">
+                        <div>
+                            <input type="checkbox" class="candidate-checkbox" checked>
+                            <span>Option A</span>
+                        </div>
+                    </div>
+                    <div class="candidate-item" data-name="Option B">
+                        <div>
+                            <input type="checkbox" class="candidate-checkbox" checked>
+                            <span>Option B</span>
+                        </div>
+                    </div>
+                    <div class="candidate-item" data-name="Option C">
+                        <div>
+                            <input type="checkbox" class="candidate-checkbox" checked>
+                            <span>Option C</span>
+                        </div>
+                    </div>
+                `;
+                
+                // Reset ranked options
+                const optionsList = document.getElementById('options-list');
+                optionsList.innerHTML = `
+                    <div class="option-item" draggable="true" data-name="Option A">
+                        <span class="rank-indicator">1</span>
+                        <span class="option-text">Option A</span>
+                        <span class="drag-handle">⋮</span>
+                    </div>
+                    <div class="option-item" draggable="true" data-name="Option B">
+                        <span class="rank-indicator">2</span>
+                        <span class="option-text">Option B</span>
+                        <span class="drag-handle">⋮</span>
+                    </div>
+                    <div class="option-item" draggable="true" data-name="Option C">
+                        <span class="rank-indicator">3</span>
+                        <span class="option-text">Option C</span>
+                        <span class="drag-handle">⋮</span>
+                    </div>
+                `;
+                
+                // Reset checkbox listeners
+                initializeCandidateCheckboxes();
+                
+                // Reset drag and drop
+                initDragAndDrop();
+                
+                // Hide results
+                document.getElementById('results').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
