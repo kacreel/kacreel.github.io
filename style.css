@@ -97,7 +97,7 @@ height:3%;
   }
 
    .portrait{
-                    background-image:url(imgs/front_website_square.jpg);
+                    background-image:url(imgs/front_website_square_small.jpg);
                     box-shadow: 2px 4px 8px 5px #999999; /*KAC added*/
                     background-size:cover; 
                     
