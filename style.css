@@ -1,5 +1,6 @@
   body {
       margin: 0;
+      background-color: rgba(39, 62, 62, 0.3);
   }
 
   section{
@@ -17,12 +18,9 @@
 
   }
 
-
-  
-
   a{text-decoration: none;
     font-family: 'Bell MT';
-}
+  }
 
 
 h3{    font-family: 'Bell MT';
